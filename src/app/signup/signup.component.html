@@ -1,0 +1,17 @@
+<div class="example-container">
+  <h3>Login</h3>
+  <form class="example-form" #loginForm="ngForm" (ngSubmit)="logIn(loginForm)">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="User" value="" name="email" id="email" ngModel>
+      </mat-form-field>
+    
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="password" type="password" name="password" id="password" ngModel/>
+      </mat-form-field>
+
+   
+          <button mat-raised-button class="mybtn-success" type="submit" >
+              <mat-icon>rowing</mat-icon>
+          </button>
+    </form>
+</div>
