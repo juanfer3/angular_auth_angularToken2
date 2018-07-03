@@ -30,21 +30,12 @@ export class AuthService {
   }
 
 
-  logIn(user: User) {
+  logIn(user: User): Observable<Response> {
 
-    this.authToken.signIn({
+    return this.authToken.signIn({
       email: user.email,
       password: user.password
-    }).subscribe(
-      res => {
-        this.userSignedIn$.next(true);
-        this.respuesta = res;
-        this.logueado = true;
-        console.log(this.respuesta.status);
-      }
-
-    );
-    return this.logueado;
+    });
     /*
 
    this.authToken.signIn({
@@ -62,5 +53,15 @@ export class AuthService {
     return this.respuesta;
     */
   }
+
+  isLoggedIn(data: boolean){
+    this.userSignedIn$.next(data);
+  }
+
+  logOut (): Observable<Response> {
+    return this.authToken.signOut(); 
+  }
+
+
 
 }

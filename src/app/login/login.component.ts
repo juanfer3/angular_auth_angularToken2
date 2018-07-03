@@ -8,6 +8,7 @@ import { AuthService } from './../servicios/auth.service';
 
 /**Models */
 import { User } from './../Models/User';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,10 +17,11 @@ import { User } from './../Models/User';
 })
 export class LoginComponent implements OnInit {
 
-  private respuesta: any
+  private respuesta: any;
 
   constructor(
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) { }
 
   logIn(form: NgForm) {
@@ -29,9 +31,15 @@ export class LoginComponent implements OnInit {
       password: form.value.password
     };
 
-    const data = this.auth.logIn(loginUser);
-    console.log('data:');
-    console.log(data);
+    this.auth.logIn(loginUser).subscribe(
+      res => {
+        if (res.status === 200) {
+          this.auth.isLoggedIn(true);
+          this.router.navigate(['/profile']);
+        }
+      }
+    );
+
   }
 
   ngOnInit() {
